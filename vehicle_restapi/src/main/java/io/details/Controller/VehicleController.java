@@ -19,7 +19,7 @@ public class VehicleController {
 
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public List<Vehicle> findAll() {
-
+ 
         return vehicleService.findAll();
     }
 
