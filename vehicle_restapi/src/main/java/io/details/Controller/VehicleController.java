@@ -36,12 +36,12 @@ public class VehicleController {
     @RequestMapping(method = RequestMethod.PUT,
             consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public String update(@RequestBody List<Vehicle> vehicles) {
-        String message = vehicleService.update(vehicles);
-        if(message == "Successfully updated"){
-            return message;
+    public List<Vehicle> update(@RequestBody List<Vehicle> vehicles) {
+        List<Vehicle> vehicleList = vehicleService.update(vehicles);
+        if(vehicleList.isEmpty()){
+            return null;
         }
-        return message="failed to execute";
+        return vehicleList;
     }
 
 }

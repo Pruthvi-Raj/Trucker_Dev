@@ -37,16 +37,17 @@ public class VehicleService implements VehicleServices{
 
     String message = "Successfully updated";
     @Transactional
-    public String update(List<Vehicle> vehicles) {
-
-        for (Vehicle vehicle: vehicles){
-            Optional<Vehicle> existing = vehicleRepository.findById(vehicle.getVin());
-            if (existing.isPresent()) {
-                throw new BadRequestException("Vehicle with vin " + vehicle.getVin() + " already exists.");
+    public List<Vehicle> update(List<Vehicle> vehicles) {
+        try {
+            for (Vehicle vehicle: vehicles){
+                Optional<Vehicle> existing = vehicleRepository.findById(vehicle.getVin());
+                vehicleRepository.save(vehicle);
             }
-            vehicleRepository.save(vehicle);
+
+        }catch (Exception ex){
+            throw new BadRequestException("Vehicles not updated");
         }
-        return message;
+        return vehicles;
     }
 
 //    @Transactional
